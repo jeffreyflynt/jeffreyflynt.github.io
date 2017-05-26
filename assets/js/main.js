@@ -18,12 +18,6 @@ var $ = jQuery.noConflict();
 
     mobileHover();
     /*-------------------------------------------------*/
-    /* =  loader
-    /*-------------------------------------------------*/
-    Pace.on("done", function(){
-        $("#myloader").fadeOut(800);
-    });
-    /*-------------------------------------------------*/
     /* =  Menu
     /*-------------------------------------------------*/
     try {
@@ -101,52 +95,6 @@ var $ = jQuery.noConflict();
 
     };
     /*-------------------------------------------------*/
-    /* =  Search Box Menu
-    /*-------------------------------------------------*/
-    try {
-        var formSearch = $('#header-searchform');
-        
-        $('.secondary-menu .search, .secondary-menu-mobile .search').on("click",function() {
-            formSearch.toggleClass('active');
-        });
-        formSearch.on("click",".form-button-close", function() {
-            formSearch.toggleClass('active');
-        });
-    } catch(err) {
-
-    };
-    /*-------------------------------------------------*/
-    /* =  Slider
-    /*-------------------------------------------------*/
-    try {
-        $('#flexslider').flexslider({
-            animation: "fade",
-            controlNav: false,
-            directionNav: false,
-            useCSS: false
-        });
-        $('#flexslider-nav').flexslider({
-            animation: "slide",
-            reverse: true,
-            easing: "swing",
-            controlNav: false, 
-            animationSpeed: 1000,
-            controlsContainer: $(".slider-controls-container"),
-            customDirectionNav: $(".slider-navigation a"),
-            before: function(slider){
-                $(slider).find(".flex-animation").each(function(){
-                    $(this).removeClass("animated fadeInUp");
-                    $(this).addClass("no-opacity");
-                });
-            },
-            after: function(slider){
-                $(slider).find(".flex-animation").addClass("animated fadeInUp");
-            },
-        });
-    } catch(err) {
-
-    }
-    /*-------------------------------------------------*/
     /* =  Isotope
     /*-------------------------------------------------*/
     try {
@@ -171,17 +119,6 @@ var $ = jQuery.noConflict();
             
         });
     
-    } catch(err) {
-
-    }
-        
-    //blog masonry
-    try {
-        var $blogContainer = $('.news-items');
-        $blogContainer.imagesLoaded( function(){
-            $blogContainer.isotope({itemSelector: '.one-item', layoutMode: 'fitRows' });
-            $blogContainer.isotope('layout');
-        });
     } catch(err) {
 
     }
@@ -225,63 +162,7 @@ var $ = jQuery.noConflict();
                 $(this).css({'height': childHeight + 'px'})
             });
         }
-    });
-    /*-------------------------------------------------*/
-    /* =  Magnific popup
-    /*-------------------------------------------------*/
-    $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-        type: 'iframe',
-        mainClass: 'mfp-fade',
-        removalDelay: 160,
-        preloader: false,
-        closeBtnInside: false,
-        fixedContentPos: true
-    });
-    $('.project-images').each(function() { // the containers for all your galleries
-        $(this).magnificPopup({
-            delegate: '.lightbox',
-            type: 'image',
-            fixedContentPos: true,
-            gallery: {
-                enabled:true
-            },
-            closeBtnInside: false
-        });
-    });
-    $('.lightbox-image').magnificPopup({
-        type: 'image',
-        gallery: {
-            enabled:true
-        },
-        closeBtnInside: false
-    });
-    /*-------------------------------------------------*/
-    /* =  Menu
-    /*-------------------------------------------------*/
-    try {
-        $('#btn-share').on("click",function() {
-            $('.share-box').toggleClass('open');
-        });
-            
-    } catch(err) {
-
-    }                  
-    /*-------------------------------------------------*/
-    /* =  Count increment
-    /*-------------------------------------------------*/
-    try {
-        $('#counters').appear(function() {
-            $('#counters .statistic span').countTo({
-                speed: 4000,
-                refreshInterval: 60,
-                formatter: function (value, options) {
-                    return value.toFixed(options.decimals);
-                }
-            });
-        });
-    } catch(err) {
-
-    }
+    });                
     /*-------------------------------------------------*/
     /* =  My color
     /*-------------------------------------------------*/
@@ -294,116 +175,10 @@ var $ = jQuery.noConflict();
     } catch(err) {
 
     }
-    /*-------------------------------------------------*/
-    /* =  Contact Form
-    /*-------------------------------------------------*/
-    var submitContact = $('#submit-contact'),
-        message = $('#msg');
-
-    submitContact.on('click', function(e){
-        e.preventDefault();
-
-        var $this = $(this);
-
-        $.ajax({
-            type: "POST",
-            url: 'contact.php',
-            dataType: 'json',
-            cache: false,
-            data: $('#contact-form').serialize(),
-            success: function(data) {
-
-                if(data.info !== 'error'){
-                    $this.parents('form').find('input[type=text],textarea,select').filter(':visible').val('');
-                    message.hide().removeClass('success').removeClass('error').addClass('success').html(data.msg).fadeIn('slow').delay(5000).fadeOut('slow');
-                } else {
-                    message.hide().removeClass('success').removeClass('error').addClass('error').html(data.msg).fadeIn('slow').delay(5000).fadeOut('slow');
-                }
-            }
-        });
-    });
 })(jQuery);
 
 $(document).ready(function($) {
     "use strict";
     
     var is_mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    /*-------------------------------------------------*/
-    /* =  Carousel
-    /*-------------------------------------------------*/
-    try {
-        $(".testimonials-carousel-single").owlCarousel({
-            loop:true,
-            items:1,
-            autoplay:true,
-            autoplayHoverPause:false,
-            dots:false,
-            nav:false,
-        });
-        $(".post-gallery, .project-gallery").owlCarousel({
-            center: true,
-            items:1,
-            loop:true
-        });
-        $(".image-carousel").owlCarousel({
-            loop:true,
-            animateOut: 'fadeOut',
-            animateIn: 'fadeIn',
-            items:1,
-            autoplay:false,
-            autoplayHoverPause:false,
-            dots:true,
-            nav:true,
-            navText: ['<span><i class="icon ion-ios-arrow-left"></i></span>','<span><i class="icon ion-ios-arrow-right"></i></span>']
-        });
-    } catch(err) {
-
-    }
-    /*-------------------------------------------------*/
-    /* =  Scroll between sections
-    /*-------------------------------------------------*/
-    $('a.btn-alt[href*=#], a.btn-pro[href*=#], a.anchor[href*=#], a.btn-down[href*=#] ').on("click",function(event) {
-        var $this = $(this);
-        var offset = -70;
-        $.scrollTo( $this.attr('href') , 850, { easing: 'swing' , offset: offset , 'axis':'y' } );
-        event.preventDefault();
-    });
-    /*-------------------------------------------------*/
-    /* =  Skills
-    /*-------------------------------------------------*/
-    try {
-        $('#skills').appear(function() {
-            jQuery('.skill-list li span').each(function(){
-                jQuery(this).animate({
-                    width:jQuery(this).attr('data-percent')
-                },2000);
-            });
-            $('.skill-list li .count').each(function () {
-                var number = $(this).attr('data-to');
-                $(this).prop('Counter',0).animate({
-                    Counter: number
-                }, {
-                    duration: 2000,
-                    easing: 'swing',
-                    step: function (now) {
-                        $(this).text(Math.ceil(now));
-                    }
-                });
-            });
-        });
-    } catch(err) {
-
-    }
-    /*-------------------------------------------------*/
-    /* =  Modaal
-    /*-------------------------------------------------*/
-    try {
-        $(".inline").modaal({
-            background:'#fff',
-            overlay_opacity: 1
-        });
-    } catch(err) {
-
-    }
 });
