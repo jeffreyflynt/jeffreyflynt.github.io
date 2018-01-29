@@ -8671,7 +8671,7 @@ html {
 
 body {
     color: rgba(70, 90, 110, .85);
-    font-size: .8rem;
+    font-size: .86rem;
     line-height: 1.6;
     background-color: #fff;
 }
@@ -14227,6 +14227,9 @@ a.text-muted:hover {
 @media (max-width:780px) {
   .display-4 {
       font-size: 3rem
+  }
+  .fa-3x {
+      font-size: 2em;
   }
 }
 
