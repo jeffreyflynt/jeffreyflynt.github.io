@@ -15082,7 +15082,8 @@ a.text-muted:hover {
 }
 
 .w-lg {
-    width: 280px
+    width: 300px;
+    height: 350px;
 }
 
 .w-xl {
